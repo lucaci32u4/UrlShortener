@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Shortener</title>
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="jquery.js"></script>
+    <script src="popper.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="main.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style>
+        .boxed {
+            padding: 30px 50px 30px;
+        }
+        .description {
+            left: 50%;
+            position: relative;
+            top: 45%;
+            transform: translate(-50%, -55%);
+            text-align: center;
+        }
+        .description h1 {
+            color: #FF5E00;
+        }
+        .description p {
+            color: #fff;
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+        .header {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            min-height: 100%;
+            min-width: 100%;
+            left: 0;
+            top: 0;
+            background: #404040;
+        }
+        .features .form-control,
+        .features input {
+            border-radius: 0;
+        }
+        .features .btn {
+            background-color: #FF5E00;
+            border: 1px solid #FF5E00;
+            color: #fff;
+            margin-top: 20px;
+        }
+        .features .btn:hover {
+            background-color: #333;
+            border: 1px solid #333;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<header class="page-header header container-fluid base-page">
+
+    <div class="overlay">
+
+        <div class="container features" style="padding-top: 100px">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+                    <div class="description">
+                        <h1>Welcome to the Clockworks URL Shortener</h1>
+                        <p>Insert your URL in the box and click the button</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="URL..." name="" id="formin">
+                    </div>
+                    <input type="submit" class="btn btn-secondary btn-block" value="Shorten" name="" onclick="onClickSubmit()">
+                    <div class="form-group" style="padding-top: 30px">
+                        <input type="text" class="form-control form-control-lg" placeholder="URL..." name="" id="formout" hidden readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</header>
+
+<div hidden id="mainContentSection">
+
+</div>
+
+<div hidden id="successSection">
+
+</div>
+
+</body>
+</html>
