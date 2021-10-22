@@ -45,6 +45,7 @@ public class Server {
             ctx.res.setContentType("text/html");
             ctx.result(templateEngine.process("index.html", templateContext));
         });
+        serveResource("favicon.ico", "image/png");
         serveResource("_bootstrap.css", "text/css");
         serveResource("_bootstrap.js", "text/javascript");
         serveResource("_jquery.js", "text/javascript");
@@ -117,6 +118,7 @@ public class Server {
     }
 
     public void close() {
+        mappingManager.close();
         server.stop();
     }
 }
