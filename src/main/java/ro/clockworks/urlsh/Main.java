@@ -24,6 +24,10 @@ public class Main implements Callable<Integer> {
     @Getter
     private int cacheMB = 16;
 
+    @CommandLine.Option(names = { "--title" }, description = "Page title to display", defaultValue = "Clockworks")
+    @Getter
+    private String title;
+
     @Override
     public Integer call() throws Exception {
 

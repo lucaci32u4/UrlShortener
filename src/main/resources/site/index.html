@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>URL Shortener</title>
 
-    <link rel="stylesheet" href="bootstrap.css">
-    <script src="jquery.js"></script>
-    <script src="popper.js"></script>
-    <script src="bootstrap.js"></script>
-    <script src="main.js"></script>
+    <link rel="stylesheet" href="_bootstrap.css">
+    <script src="_jquery.js"></script>
+    <script src="_popper.js"></script>
+    <script src="_bootstrap.js"></script>
+    <script src="_main.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -72,7 +72,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 boxed">
                     <div class="description">
-                        <h1>Welcome to the Clockworks URL Shortener</h1>
+                        <h1>Welcome to the <span th:text="${title}"></span> URL Shortener</h1>
                         <p>Insert your URL in the box and click the button</p>
                     </div>
                 </div>

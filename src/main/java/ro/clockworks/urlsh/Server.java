@@ -1,9 +1,15 @@
 package ro.clockworks.urlsh;
 
 import io.javalin.Javalin;
-import io.javalin.http.Context;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.http.util.RateLimit;
+import org.thymeleaf.ITemplateEngine;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.DefaultTemplateResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,8 +22,20 @@ public class Server {
 
     private final Javalin server;
     private final MappingManager mappingManager;
+    private final TemplateEngine templateEngine = new TemplateEngine();
+    private final Context templateContext = new Context();
 
     public Server(Main params, MappingManager mappingManager) {
+
+        ClassLoaderTemplateResolver defaultTemplateResolver = new ClassLoaderTemplateResolver();
+        defaultTemplateResolver.setTemplateMode(TemplateMode.HTML);
+        defaultTemplateResolver.setPrefix("/site/");
+        defaultTemplateResolver.setSuffix(".html");
+        defaultTemplateResolver.setCharacterEncoding("UTF-8");
+        defaultTemplateResolver.setCacheable(true);
+        templateEngine.setTemplateResolver(defaultTemplateResolver);
+        templateContext.setVariable("title", params.getTitle());
+
         this.mappingManager = mappingManager;
         server = Javalin.create(c -> {
             c.showJavalinBanner = false;
@@ -25,13 +43,13 @@ public class Server {
 
         server.get("/", ctx -> {
             ctx.res.setContentType("text/html");
-            ctx.result(Server.class.getResourceAsStream("/site/index.html"));
+            ctx.result(templateEngine.process("index.html", templateContext));
         });
-        serveResource("bootstrap.css", "text/css");
-        serveResource("bootstrap.js", "text/javascript");
-        serveResource("jquery.js", "text/javascript");
-        serveResource("main.js", "text/javascript");
-        serveResource("popper.js", "text/javascript");
+        serveResource("_bootstrap.css", "text/css");
+        serveResource("_bootstrap.js", "text/javascript");
+        serveResource("_jquery.js", "text/javascript");
+        serveResource("_main.js", "text/javascript");
+        serveResource("_popper.js", "text/javascript");
 
         server.post("/", ctx -> {
             try {
@@ -55,10 +73,10 @@ public class Server {
                     ctx.status(400); // bad protocol
                     return;
                 }
-                body = "http://" + body;
+                body = "https://" + body;
             }
 
-            String proto =  (body.startsWith("https://")) ? "https://" :  "http://";
+            String proto = (body.startsWith("https://")) ? "https://" : "http://";
 
 
             String urlid = mappingManager.createMapping(body);
@@ -88,8 +106,13 @@ public class Server {
         String resp = "/" + res;
         String resr = "/site/" + res;
         server.get(resp, ctx -> {
+            var out = Server.class.getResourceAsStream(resr);
+            if (out == null) {
+                ctx.status(404);
+                return;
+            }
             ctx.res.setContentType(mime);
-            ctx.result(Server.class.getResourceAsStream(resr));
+            ctx.result(out);
         });
     }
 
