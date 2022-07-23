@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Url Shortener</title>
+
+    <link rel="stylesheet" href="/-/bootstrap.css">
+    <link rel="stylesheet" href="/-/main.css">
+    <script src="/-/jquery.js"></script>
+    <script src="/-/popper.js"></script>
+    <script src="/-/bootstrap.js"></script>
+    <script src="/-/main.js"></script>
+
+</head>
+<body>
+
+
+<header class="page-header header container-fluid base-page">
+
+    <div class="overlay">
+
+        <div class="container features" style="padding-top: 100px">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+                    <div class="description">
+                        <a href="https://lucaci32u4.xyz">
+                            <img src="/-/logo.svg" height="100px" style="max-width: 100%">
+                        </a>
+                        <br> <br> <br>
+                        <h1>Welcome to the <span th:text="${config.name}"></span> URL Shortener</h1>
+                        <p>Insert your URL in the box and click the button</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="URL..." name="" id="url-input">
+                    </div>
+
+                    <div class="form-check form-switch formdescription" style="padding-top: 30px">
+                        <input class="form-check-input" type="checkbox" id="switchAlias">
+                        <label class="form-check-label" for="switchAlias">
+                            <p>Use a custom shortened URL</p>
+                        </label>
+
+                        <input type="text" class="form-control form-control-lg" placeholder="URL..." name="" hidden id="alias-input">
+
+                        <br>
+                    </div>
+
+                    <div class="form-check form-switch formdescription" style="padding-top: 30px">
+                        <input class="form-check-input" type="checkbox" id="switchInpage">
+                        <label class="form-check-label" for="switchInpage">
+                            <p>
+                                Use intermediary page redirect
+                                <br> <br>
+                                This option hides the destination page by presenting an intermediary page to the browser. Prevents the loading of thumnnails of the destination.
+                            </p>
+                        </label>
+                        <br>
+                    </div>
+
+                    <div class="form-check form-switch formdescription" style="padding-top: 30px">
+                        <input class="form-check-input" type="checkbox" id="switchTracking">
+                        <label class="form-check-label" for="switchTracking">
+                            <p>
+                                Track visits and statistics
+                                <br> <br>
+                                This option enables the tracking of visits to your destination. IP addresses and timestamps of visitors are logged and will be publicly visible.
+                            </p>
+                        </label>
+                        <br>
+                    </div>
+
+                    <input type="submit" class="btn btn-secondary btn-block" value="Shorten" name="" onclick="onClickSubmit()">
+                    <div class="form-group" style="padding-top: 30px">
+                        <input type="text" class="form-control form-control-lg" placeholder="URL..." name="" id="url-output" hidden readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</header>
+
+<div hidden id="mainContentSection">
+
+</div>
+
+<div hidden id="successSection">
+
+</div>
+
+<script>
+    setupJs()
+</script>
+
+</body>
+</html>
