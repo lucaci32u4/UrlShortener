@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Url Shortener</title>
+
+    <link rel="stylesheet" href="/-/bootstrap.css">
+    <link rel="stylesheet" href="/-/main.css">
+    <script src="/-/jquery.js"></script>
+    <script src="/-/popper.js"></script>
+    <script src="/-/bootstrap.js"></script>
+    <script src="/-/main.js"></script>
+
+
+</head>
+<body>
+
+
+<header class="page-header header container-fluid base-page">
+
+    <div class="overlay">
+
+        <div class="container features" style="padding-top: 100px">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+                    <div class="description">
+                        <h1>Welcome to the <span th:text="${title}"></span> URL Shortener</h1>
+                        <p>Insert your URL in the box and click the button</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="URL..." name="" id="url-input">
+                    </div>
+                    <input type="submit" class="btn btn-secondary btn-block" value="Shorten" name="" onclick="onClickSubmit()">
+                    <div class="form-group" style="padding-top: 30px">
+                        <input type="text" class="form-control form-control-lg" placeholder="URL..." name="" id="url-output" hidden readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</header>
+
+<div hidden id="mainContentSection">
+
+</div>
+
+<div hidden id="successSection">
+
+</div>
+
+</body>
+</html>
