@@ -16,6 +16,12 @@
     font-size: 1.3rem;
     line-height: 1.5;
 }
+
+.formdescription p {
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1.2;
+}
 .header {
     background-size: cover;
     background-position: center;

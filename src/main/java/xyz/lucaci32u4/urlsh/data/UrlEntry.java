@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UrlEntry {
@@ -26,6 +28,11 @@ public class UrlEntry {
     @Getter @Setter
     private boolean inpageRedirect;
 
-    // todo insert stats here lazy loaded
+    @Getter @Setter
+    private boolean logVisits;
+
+    @Getter
+    @OneToMany(mappedBy = "url", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Visitor> visits = new ArrayList<>(0);
 
 }

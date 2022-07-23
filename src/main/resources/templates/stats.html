@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Url Shortener</title>
+
+    <link rel="stylesheet" href="/-/bootstrap.css">
+    <link rel="stylesheet" href="/-/main.css">
+    <script src="/-/jquery.js"></script>
+    <script src="/-/popper.js"></script>
+    <script src="/-/bootstrap.js"></script>
+
+</head>
+<body>
+
+
+<header class="page-header header container-fluid base-page">
+
+    <div class="overlay">
+
+        <div class="container features" style="padding-top: 100px">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+                    <div class="description">
+                        <a href="https://lucaci32u4.xyz">
+                            <img src="/-/logo.svg" height="100px" style="max-width: 100%">
+                        </a>
+                        <br> <br> <br>
+                        <div th:if="${url != null}">
+                            <h1>Statistics for <b><i><span th:text="${url.reference}"></span></i></b></h1>
+                            <p th:if="${url.logVisits}">Total of <span th:text="${url.visits.size()}"></span> visits</p>
+                            <p th:if="${!url.logVisits}">This URL does not have tracking enabled</p>
+                        </div>
+                        <div th:if="${url == null}">
+`                           <h1>This url does not exist</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 boxed">
+
+                    <table th:if="${url != null && url.visits.size() > 0 && url.logVisits}" class="description">
+                        <thead>
+                           <tr>
+                               <th><h1>IP</h1></th>
+                               <th><h1>Timestamp</h1></th>
+                           </tr>
+                        </thead>
+                        <tbody class="formdescription" style="padding-top: 50px">
+                            <tr th:each="visit : ${url.visits}">
+                                <td style="padding-right: 50px"><p><span th:text="${visit.address}"></span></p></td>
+                                <td class="p"><p><span th:text="${#strings.replace(#strings.replace(visit.timestamp.toString(), 'T', ' '), 'Z', '')}"></span></p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</header>
+
+<div hidden id="mainContentSection">
+
+</div>
+
+<div hidden id="successSection">
+
+</div>
+
+<script>
+    $(document).ready(() => {
+        $('.header').height($(window).height());
+    })
+    $(document).resize(() => {
+        $('.header').height($(window).height());
+    })
+</script>
